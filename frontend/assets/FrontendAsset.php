@@ -16,14 +16,22 @@ use yii\web\AssetBundle;
 class FrontendAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web/frontend/web';
+    public $baseUrl = '@web/frontend/web/store';
 
     public $css = [
+
+        //'css/bootstrap.css',
+        'css/owl-slider.css',
         'css/style.css',
+        'https://fonts.googleapis.com/css?family=Roboto',
     ];
 
     public $js = [
-        'js/app.js',
+
+        'js/jquery-1.11.1.min.js',
+        'js/bootstrap.min.js',
+        'js/owl.carousel.min.js',
+        'js/store.js',
     ];
 
     public $depends = [

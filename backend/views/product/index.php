@@ -26,18 +26,59 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'slug',
-            'cat_id',
-            'image',
-            // 'price',
-            // 'description',
-            // 'status',
-            // 'created_at',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
+            //'category_id',
+            [
+                'attribute' => 'category_id',
+                'format' => 'raw',
+                'value' => function($model){
 
-            ['class' => 'yii\grid\ActionColumn'],
+                    return isset($model->parentShow) ? $model->parentShow->cat_name : '';
+
+
+                },
+
+            ],
+//            'slug',
+            'price',
+            // 'description',
+//             'image_base_url:url',
+//             'image_base_path',
+//             'status',
+            [
+                'attribute' => 'status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return ($model->status ==1) ? '<span class="label label-success">Hoạt động</span>':'<span class="label label-danger">Bị Khóa</span>';
+                },
+
+            ],
+            'created_at:dateTime',
+//            'created_by',
+            [
+                'attribute' => 'created_by',
+                'format' => 'raw',
+                'value' => function($model){
+                    return isset($model->created) ? $model->created->username : '';
+                },
+
+            ],
+
+            'updated_at:dateTime',
+//            'updated_by',
+            [
+                'attribute' => 'updated_by',
+                'format' => 'raw',
+                'value' => function($model){
+                    return isset($model->updated) ? $model->updated->username : '';
+                },
+
+            ],
+
+            [
+                'class' => 'backend\grid\ActionColumn',
+                'contentOptions'=> ["style"=>"width:100px;"],
+                'template'=>'{view} {update} {delete}'
+            ],
         ],
     ]); ?>
 </div>

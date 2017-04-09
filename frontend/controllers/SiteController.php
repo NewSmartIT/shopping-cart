@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\store\Product;
 use Yii;
 use frontend\models\ContactForm;
 use yii\web\Controller;
@@ -32,7 +33,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => Product::find()->where(['status' => 1])->orderBy('id DESC'),
+            'pagination' => false,
+        ]);
+        return $this->render('index', ['listDataProvider' => $dataProvider]);
     }
 
     public function actionContact()

@@ -71,7 +71,7 @@ $config = [
                     ]
                 ],
                 'yii\web\JqueryAsset' => [
-                    'js' => ['https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',]
+                    'js' => ['',]
                 ],
 
             ],

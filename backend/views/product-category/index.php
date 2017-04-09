@@ -26,14 +26,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'cat_name',
-            'slug',
-            'status',
-            'created_at',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
+//            'slug',
+//            'status',
+            [
+                'attribute' => 'status',
+                'format' => 'raw',
+                'value' => function($model){
+                    return ($model->status ==1) ? '<span class="label label-success">Hoạt động</span>':'<span class="label label-danger">Bị Khóa</span>';
+                },
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ],
+//            'parent',
+            [
+                'attribute' => 'parent',
+                'format' => 'raw',
+                'value' => function($model){
+
+                        return isset($model->parentShow) ? $model->parentShow->cat_name : '';
+
+
+                },
+
+            ],
+            'created_at:dateTime',
+            'updated_at:dateTime',
+//            'created_by',
+            [
+                'attribute' => 'created_by',
+                'format' => 'raw',
+                'value' => function($model){
+                    return isset($model->created) ? $model->created->username : '';
+                },
+
+            ],
+//            'updated_by',
+            [
+                'attribute' => 'updated_by',
+                'format' => 'raw',
+                'value' => function($model){
+                    return isset($model->updated) ? $model->updated->username : '';
+                },
+
+            ],
+            [
+            'class' => 'backend\grid\ActionColumn',
+            'contentOptions'=> ["style"=>"width:100px;"],
+            'template'=>'{view} {update} {delete}'
+            ],
         ],
     ]); ?>
 </div>

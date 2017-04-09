@@ -14,25 +14,42 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?php $cat = new \common\models\store\ProductCategory(); ?>
+    <?= $form->field($model, 'category_id')->widget(\kartik\select2\Select2::classname(), [
+    'data' => $cat->getParent(),
+    'language' => 'de',
+    'options' => ['placeholder' => 'Select a state ...'],
+    'pluginOptions' => [
+    'allowClear' => true
+    ],
+    ])?>
+
+
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'cat_id')->textInput() ?>
-
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?php echo $form->field($model, 'product_image')->widget(
+        \trntv\filekit\widget\Upload::className(),
+        [
+            'url' => ['/file-storage/upload'],
+            'maxFileSize' => 5000000, // 5 MiB
+        ]);
+    ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?php echo $form->field($model, 'attachments')->widget(
+        \trntv\filekit\widget\Upload::className(),
+        [
+            'url' => ['/file-storage/upload'],
+            'sortable' => true,
+            'maxFileSize' => 10000000, // 10 MiB
+            'maxNumberOfFiles' => 10
+        ]);
+    ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
+    <?= $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

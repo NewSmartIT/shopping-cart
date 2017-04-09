@@ -153,6 +153,17 @@ $bundle = \backend\assets_b\BackendAsset::register($this);
                             ]
                         ],
                         [
+                            'label'=>Yii::t('backend', 'Store'),
+                            'url' => '#',
+                            'icon'=>'<i class="fa fa-edit"></i>',
+                            'options'=>['class'=>'treeview'],
+                            'items'=>[
+                                ['label'=>Yii::t('backend', 'Category'), 'url'=>['/product-category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>Yii::t('backend', 'Product'), 'url'=>['/product/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+
+                            ]
+                        ],
+                        [
                             'label'=>Yii::t('backend', 'System'),
                             'options' => ['class' => 'header']
                         ],
